@@ -9,7 +9,7 @@ function App() {
       camera={{ position: [0, 2, 5], fov: 30 }}
     >
       <color attach="background" args={["#ececec"]} />
-      <Experience />
+      <Experience/>
     </Canvas>
   );
 }
