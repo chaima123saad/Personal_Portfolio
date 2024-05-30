@@ -1,61 +1,21 @@
 import React, { useRef,useEffect } from 'react';
 import { useAnimations, useGLTF,useFBX } from '@react-three/drei';
-import { useFrame } from "@react-three/fiber";
-import { useControls } from "leva";
-import * as THREE from "three";
 
 export function Avatar(props) {
-  const { animation } = props;
 
-  const { headFollow, cursorFollow, wireframe } = useControls({
-    headFollow: false,
-    cursorFollow: false,
-    wireframe: false,
-  });
   const group = useRef();
-  const { nodes, materials } = useGLTF('models/65fac1ec7880af7ceff21936.glb');
-  const { animations: typingAnimation } = useFBX('animations/Typing.fbx');
-  const { animations: standingAnimation } = useFBX(
-    'animations/Standing Idle.fbx'
-  );
-  const { animations: fallingAnimation } = useFBX(
-    'animations/Falling Idle.fbx'
-  );
-
-  typingAnimation[0].name = "Typing";
-  standingAnimation[0].name = "Standing";
-  fallingAnimation[0].name = "Falling";
-
-  const { actions } = useAnimations(
-    [typingAnimation[0], standingAnimation[0], fallingAnimation[0]],
-    group
-  );
-
-  useFrame((state) => {
-    if (headFollow) {
-      group.current.getObjectByName("Head").lookAt(state.camera.position);
-    }
-    if (cursorFollow) {
-      const target = new THREE.Vector3(state.mouse.x, state.mouse.y, 1);
-      group.current.getObjectByName("Spine2").lookAt(target);
-    }
-  });
+  const { nodes, materials } = useGLTF("models/6655b059dd37bca36d7b1695.glb");
+  const { animations: typingAnimation } = useFBX("animations/Typing.fbx");
+  typingAnimation[0].name="Typing";
+  const { actions } = useAnimations(typingAnimation, group);
 
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
-    return () => {
-      actions[animation].reset().fadeOut(0.5);
-    };
-  }, [animation]);
+  actions["Typing"].reset().play();
+  }, []);
 
-  useEffect(() => {
-    Object.values(materials).forEach((material) => {
-      material.wireframe = wireframe;
-    });
-  }, [wireframe]);
   return (
-    <group {...props} ref={group} dispose={null}>
-      <group>
+    <group {...props} ref={group} dispose={null} scale={[1.5, 1, 1.5]} position={[2.4, -1, 0]}>
+      <group rotation-x={-Math.PI / 20} rotation-z={-Math.PI / 4}  rotation-y={-Math.PI / 30} >
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="EyeLeft"
@@ -124,4 +84,4 @@ export function Avatar(props) {
   )
 }
 
-useGLTF.preload('models/65fac1ec7880af7ceff21936.glb')
+useGLTF.preload('models/6655b059dd37bca36d7b1695.glb')
