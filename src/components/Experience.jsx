@@ -3,6 +3,7 @@ import { Environment } from "@react-three/drei";
 import { Avatar } from "./Avatar";
 import { Desk } from "./Desk";
 import { Keyboard } from "./Portal_keyboard";
+import { Chaise } from './Chaise';
 import { BoxGeometry, MeshStandardMaterial, Mesh } from 'three';
 
 export const Experience = () => {
@@ -24,10 +25,8 @@ export const Experience = () => {
       <group>
         <Avatar />
         <Keyboard/>
-
+<Chaise/>
         <Desk/>
-        {/* Add the cube to the scene */}
-        <primitive object={cube} position={[2.3, -0.7, 0]} rotation-z={-Math.PI / 2.2} rotation-x={-Math.PI / 19}  rotation-y={-Math.PI / 3} ref={cubeRef} />
       </group>
     </>
   );
