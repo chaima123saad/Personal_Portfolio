@@ -13,8 +13,9 @@ export function Avatar(props) {
   actions["Typing"].reset().play();
   }, []);
 
+  
   return (
-    <group {...props} ref={group} dispose={null} scale={[1.5, 1, 1.5]} position={[2.4, -1, 0]}>
+    <group {...props} ref={group} dispose={null} scale={[1.3, 1, 1.5]} position={[2.3, -1.05, 0]}>
       <group rotation-x={-Math.PI / 20} rotation-z={-Math.PI / 4}  rotation-y={-Math.PI / 30} >
       <primitive object={nodes.Hips} />
       <skinnedMesh
